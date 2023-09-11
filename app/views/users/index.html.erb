@@ -1,1 +1,27 @@
-<h1>ユーザー一覧</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+
+    <div class="col-md-8 offset-md-1">
+      <h1>ユーザー一覧</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>プロフィール画像</th>
+            <th>ユーザーネーム</th>
+            <th>自己紹介</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= image_tag user.get_profile_image, width: 50, height: 50 %></td>
+            <td><%= link_to user.name, user_path(user) %></td>
+            <td><%= user.introduction %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

@@ -1,12 +1,29 @@
-<h1>投稿詳細</h1>
-<div>
-  <%= image_tag @post.get_image %>
-  <p>タイトル：<%= @post.title %></p>
-  <p>本文：<%= @post.body %></p>
-  <p>ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete %>
-  <% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <p class="text-right my-2 mr-2"><%= @post.created_at.strftime('%Y/%m/%d') %></p>
+        <% if @post.get_image.attached? %>
+          <%= image_tag @post.get_image, class: "card-img-top" %>
+        <% end %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-3">
+              <p><%= image_tag @post.user.get_profile_image, width: 70, height: 70 %></p>
+              <p><%= @post.user.name %></p>
+            </div>
+            <div class="col-sm-12 col-md-9">
+              <h5 class="card-title"><%= @post.title %></h5>
+              <p class="card-text"><%= @post.body %></p>
+              <% if @post.user == current_user %>
+                <%= link_to "編集", edit_post_path(@post.id), class: "text-success" %>
+                |
+                <%= link_to "削除", post_path(@post), method: :delete, class: "text-danger" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

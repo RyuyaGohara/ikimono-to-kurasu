@@ -1,2 +1,39 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+
+      <h2>投稿編集</h2>
+
+
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>error prohibited this obj from being saved:
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+
+      <%= form_with model: @post do |f| %>
+
+        <h6>画像</h6>
+        <%= f.file_field :image, class: "form-control-file", accept: "image/*" %>
+
+        <h6>タイトル</h6>
+        <%= f.text_field :title %>
+
+        <h6>本文</h6>
+        <%= f.text_area :body %>
+
+        <br><%= f.submit '更新' %>
+
+      <% end %>
+
+      <%= link_to "詳細", post_path(@post) %>
+      |
+      <%= link_to "一覧", "/posts" %>
+
+    </div>
+  </div>
+</div>

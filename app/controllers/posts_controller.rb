@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    # 新着の投稿が上になるように
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def new

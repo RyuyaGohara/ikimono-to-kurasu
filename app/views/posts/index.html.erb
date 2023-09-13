@@ -19,18 +19,19 @@
               </h5>
               <p class="card-text"><%= post.body %></p>
               <% if post.favorited_by?(current_user) %>
-                <p>
+                <span>
                   <%= link_to post_favorites_path(post), method: :delete do %>
-                    ♥<%= post.favorites.count %>
+                    <i class="fa-solid fa-heart"></i><%= post.favorites.count %>
                   <% end %>
-                </p>
+                </span>
                 <% else %>
-                <p>
+                <span>
                   <%= link_to post_favorites_path(post), method: :post do %>
-                    ♡<%= post.favorites.count %>
+                    <i class="fa-regular fa-heart"></i><%= post.favorites.count %>
                   <% end %>
-                </p>
+                </span>
               <% end %>
+              <span class="ml-4"><i class="fa-regular fa-comment"></i><%= post.post_comments.count %></span>
             </div>
           </div>
         </div>

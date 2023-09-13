@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
@@ -15,11 +15,26 @@
             <div class="col-sm-12 col-md-9">
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-text"><%= @post.body %></p>
-              <% if @post.user == current_user %>
-                <%= link_to "編集", edit_post_path(@post.id), class: "text-success" %>
-                |
-                <%= link_to "削除", post_path(@post), method: :delete, class: "text-danger" %>
+              <% if @post.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to post_favorites_path(@post), method: :delete do %>
+                    ♥<%= @post.favorites.count %>
+                  <% end %>
+                </p>
+                <% else %>
+                <p>
+                  <%= link_to post_favorites_path(@post), method: :post do %>
+                    ♡<%= @post.favorites.count %>
+                  <% end %>
+                </p>
               <% end %>
+              <p class="text-right my-2 mr-2">
+                <% if @post.user == current_user %>
+                  <%= link_to "編集", edit_post_path(@post.id), class: "text-success" %>
+                  |
+                  <%= link_to "削除", post_path(@post), method: :delete, class: "text-danger" %>
+                <% end %>
+              </p>
             </div>
           </div>
         </div>

@@ -10,6 +10,14 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc)
   end
 
+  # お気に入り投稿一覧用
+  def favorites
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
+  end
+
+
   def edit
     @user = User.find(params[:id])
   end

@@ -9,11 +9,11 @@
         <% end %>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-12 col-md-3">
+            <div class="col-md-3">
               <p><%= image_tag @post.user.get_profile_image, width: 80, height: 80 %></p>
               <p><%= @post.user.name %></p>
             </div>
-            <div class="col-sm-12 col-md-9">
+            <div class="col-md-9">
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-text"><%= @post.body %></p>
 

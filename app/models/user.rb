@@ -17,4 +17,12 @@ class User < ApplicationRecord
     profile_image
   end
 
+  def self.looks(search, word)
+    if search == "partial_match"
+      @user = User.where("name LIKE?", "%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+
 end

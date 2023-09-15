@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
   get "/about"=>"homes#about"
+  get "search"=>"searches#search"
 
   resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  
+
   resources :users, only: [:index, :show, :edit, :update] do
     member do
       get :favorites

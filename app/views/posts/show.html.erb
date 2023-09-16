@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-3">
   <div class="row justify-content-center">
     <div class="col-md-8">
 
@@ -35,8 +35,8 @@
 
               <p class="text-right my-2 mr-2">
                 <% if @post.user == current_user %>
-                  <%= link_to "編集", edit_post_path(@post.id), class: "text-success" %>
-                  <%= link_to "削除", post_path(@post), method: :delete, class: "text-danger", data: { confirm: "この投稿を本当に削除しますか?" } %>
+                  <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-outline-success" %>
+                  <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-outline-danger", data: { confirm: "この投稿を本当に削除しますか?" } %>
                 <% end %>
               </p>
 
@@ -58,7 +58,7 @@
                   <p><%= post_comment.comment %></p>
                   <p class="text-right mr-2">
                   <% if post_comment.user == current_user %>
-                    <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "text-danger" %>
+                    <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-outline-danger" %>
                   <% end %>
                   </p>
                 </div>

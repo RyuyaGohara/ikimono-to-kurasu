@@ -29,7 +29,7 @@
               <%= link_to "ユーザー一覧", users_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%= link_to '投稿フォーム', new_post_path, class: 'nav-link text-dark' %>
+              <%= link_to '新規投稿', new_post_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
@@ -52,14 +52,21 @@
             </li>
             <% end %>
             </ul>
+
           </div>
         </div>
       </nav>
     </header>
 
-    <main class="mb-auto">
-    <%= yield %>
+    <main>
+      <div class = "text-center p-3">
+        <% unless content_for?(:exclude_partial) %>
+          <%= render 'searches/search' %>
+        <% end %>
+      </div>
+      <%= yield %>
     </main>
+
 
     <footer>
       <div class="container my-md-5">

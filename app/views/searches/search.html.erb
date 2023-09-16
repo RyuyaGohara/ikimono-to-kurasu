@@ -1,2 +1,59 @@
-<h1>Searches#search</h1>
-<p>Find me in app/views/searches/search.html.erb</p>
+<table class="table table-hover table-inverse">
+  <% if @range == "User" %>
+
+    <h2>Users search for "<%= @word %>"</h2>
+    <% if @users.present? %>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th>introduction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user_path(user) do %>
+                <%= image_tag user.get_profile_image, size: '50x50' %>
+              <% end %>
+            </td>
+            <td><%=link_to user.name, user_path(user) %></td>
+            <td><%= user.introduction %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <p style="text-align: center; font-weight: bold;">該当するユーザーは見つかりませんでした</p>
+    <% end %>
+
+  <% else %>
+
+    <h2>Posts search for "<%= @word %>"</h2>
+    <% if @posts.present? %>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>opinion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to user_path(post.user) do %>
+                <%= image_tag post.user.get_profile_image, size: '50x50' %>
+              <% end %>
+            </td>
+            <td><%= link_to post.title, post_path(post.id) %></td>
+            <td><%= post.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <p style="text-align: center; font-weight: bold;">該当する投稿は見つかりませんでした</p>
+    <% end %>
+
+  <% end %>
+</table>

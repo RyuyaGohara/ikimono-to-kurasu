@@ -9,6 +9,28 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+# フォローをした、されたの関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+# フォロー一覧画面（あるユーザーにフォローされたユーザーを参照）
+  has_many :followings, through: :relationships, source: :followed
+# フォロワー一覧画面で使う（あるユーザーをフォローしたユーザーを参照）
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
+# フォローしたときの処理
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+# フォローを外すときの処理
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+# フォローしているか判定
+  def following?(user)
+    followings.include?(user)
+  end
+
+# プロフィール画像
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -17,6 +39,7 @@ class User < ApplicationRecord
     profile_image
   end
 
+# 検索機能
   def self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")
@@ -31,6 +54,7 @@ class User < ApplicationRecord
     end
   end
 
+# ゲストログイン
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest

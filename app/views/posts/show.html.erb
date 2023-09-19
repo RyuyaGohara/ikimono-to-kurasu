@@ -17,18 +17,20 @@
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-text"><%= @post.body %></p>
 
-              <% if @post.favorited_by?(current_user) %>
-                <span>
-                  <%= link_to post_favorites_path(@post), method: :delete do %>
-                    <i class="fa-solid fa-heart"></i><%= @post.favorites.count %>
-                  <% end %>
-                </span>
-                <% else %>
-                <span>
-                  <%= link_to post_favorites_path(@post), method: :post do %>
-                    <i class="fa-regular fa-heart"></i><%= @post.favorites.count %>
-                  <% end %>
-                </span>
+              <% if user_signed_in? %>
+                <% if @post.favorited_by?(current_user) %>
+                  <span>
+                    <%= link_to post_favorites_path(@post), method: :delete do %>
+                      <i class="fa-solid fa-heart"></i><%= @post.favorites.count %>
+                    <% end %>
+                  </span>
+                  <% else %>
+                  <span>
+                    <%= link_to post_favorites_path(@post), method: :post do %>
+                      <i class="fa-regular fa-heart"></i><%= @post.favorites.count %>
+                    <% end %>
+                  </span>
+                <% end %>
               <% end %>
 
               <span class="ml-4"><i class="fa-regular fa-comment"></i><%= @post.post_comments.count %></span>
@@ -66,6 +68,7 @@
             </div>
             <% end %>
           </div>
+        <% if user_signed_in? %>
           <hr>
           <div class="new-comment card-text">
             <%= form_with model: [@post, @post_comment] do |f| %>
@@ -76,6 +79,7 @@
               <%= f.submit "送信する", class: "btn btn-primary float-right" %>
             <% end %>
           </div>
+        <% end %>
         <!--コメントセクション-->
         </div>
       </div>

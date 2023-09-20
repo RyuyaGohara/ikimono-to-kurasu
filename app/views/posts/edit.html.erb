@@ -1,39 +1,25 @@
 <div class="container">
-  <div class="row">
-    <div class="mx-auto">
-
-      <h2>投稿編集</h2>
-
-
-      <% if @post.errors.any? %>
-        <%= @post.errors.count %>error prohibited this obj from being saved:
-        <ul>
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
-
-      <%= form_with model: @post do |f| %>
-
-        <h6>画像</h6>
-        <%= f.file_field :image, class: "form-control-file", accept: "image/*" %>
-
-        <h6>タイトル</h6>
-        <%= f.text_field :title %>
-
-        <h6>本文</h6>
-        <%= f.text_area :body %>
-
-        <br><%= f.submit '更新' %>
-
-      <% end %>
-
-      <%= link_to "詳細", post_path(@post) %>
-      |
-      <%= link_to "一覧", "/posts" %>
-
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light py-4 mb-0">投稿編集</h5>
+      <div class="form-body p-4">
+        <div class="mx-auto text-center">
+          <p>編集したい内容を入力してください</p>
+        </div>
+        <hr>
+        <%= form_with model: @post do |f| %>
+          <div class="input-group mb-3">
+            <%= f.file_field :image, accept: "image/*" %>
+          </div>
+          <div class="input-group mb-3">
+            <%= f.text_field :title, class: "form-control", placeholder: "タイトル" %>
+          </div>
+          <div class="input-group mb-3">
+            <%= f.text_area :body, class: "form-control", placeholder: "本文" %>
+          </div>
+          <%= f.submit "更新", class: "btn btn-lg btn-block btn-info mt-5" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

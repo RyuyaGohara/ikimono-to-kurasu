@@ -63,5 +63,10 @@ class User < ApplicationRecord
       user.name = "ゲスト"
     end
   end
+# ゲストユーザーかどうかを判定するメソッド
+  def guest?
+    email == 'guest@example.com'
+  end
+
 
 end

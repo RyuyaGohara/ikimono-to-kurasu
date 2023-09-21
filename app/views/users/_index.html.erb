@@ -1,0 +1,36 @@
+<div class="container my-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <% users.each do |user| %>
+      <% unless user.guest? %> <!-- ゲストユーザーを除外 -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <p><%= image_tag user.get_profile_image, width: 100, height: 100 %></p>
+            </div>
+            <div class="col-md-9">
+              <p><strong>ユーザーネーム：</strong><%= link_to user.name, user_path(user) %></p>
+              <p><strong>自己紹介：</strong><%= user.introduction %></p>
+              <span class="mr-3">フォロー: <%= user.followings.count %></span>
+              <span class="mr-3">フォロワー: <%= user.followers.count %></span>
+              <span class="float-right">
+                <% if current_user %>
+                  <% if current_user != user %>
+                    <% if current_user.following?(user) %>
+                      <%= link_to "フォローを外す", user_relationships_path(user.id), method: :delete, class: "btn btn-outline-secondary" %>
+                    <% else %>
+                      <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-outline-primary" %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

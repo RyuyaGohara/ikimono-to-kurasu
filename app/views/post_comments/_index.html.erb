@@ -1,0 +1,24 @@
+<hr>
+<div class="comments card-text">
+  <label>コメント</label>
+  <% post.post_comments.each do |post_comment| %>
+  <div class="card">
+    <div class="row">
+      <div class="col-md-3">
+        <p class="mt-2 ml-2"><%= image_tag post_comment.user.get_profile_image, width: 40, height: 40 %></p>
+        <p class="ml-1"><%= post_comment.user.name %></p>
+      </div>
+      <div class="col-md-6 mt-2">
+        <p><%= post_comment.comment %></p>
+      </div>
+      <div class="col-md-3 mt-2">
+        <p class="text-right mr-2">
+        <% if post_comment.user == current_user %>
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-outline-danger", remote:true %>
+        <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

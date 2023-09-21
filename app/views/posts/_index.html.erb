@@ -19,11 +19,11 @@
                 <% end %>
               </h5>
               <p class="card-text"><%= post.body %></p>
-
+<!--いいねボタン-->
               <span id="favorite_btn_<%= post.id %>">
                 <%= render "favorites/favorite_btn", post: post %>
               </span>
-
+<!--コメント数-->
               <span class="ml-4"><i class="fa-regular fa-comment"></i><%= post.post_comments.count %></span>
 
             </div>

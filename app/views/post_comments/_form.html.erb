@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+  <hr>
+  <div class="new-comment card-text">
+    <%= form_with model: [post, post_comment], local: false do |f| %>
+      <div class="form-group">
+        <label>コメントする</label>
+        <%= f.text_area :comment, class: "form-control", placeholder: "コメントをここに", rows: 5, id: "comment_textarea" %>
+      </div>
+      <%= f.submit "送信する", class: "btn btn-primary float-right" %>
+    <% end %>
+  </div>
+<% end %>

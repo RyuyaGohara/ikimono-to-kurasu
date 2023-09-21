@@ -16,13 +16,15 @@
             <div class="col-md-9">
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-text"><%= @post.body %></p>
-
+<!--いいねボタン-->
               <span id="favorite_btn_<%= @post.id %>">
                 <%= render "favorites/favorite_btn", post: @post %>
               </span>
-
-              <span class="ml-4"><i class="fa-regular fa-comment"></i><%= @post.post_comments.count %></span>
-
+<!--コメント数-->
+              <span id="comment_counter">
+                <%= render 'post_comments/counter', post: @post %>
+              </span>
+<!--投稿の編集、削除ボタン-->
               <p class="text-right my-2 mr-2">
                 <% if @post.user == current_user %>
                   <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-outline-success" %>
@@ -33,42 +35,15 @@
             </div>
           </div>
 
-        <!--コメントセクション-->
-          <hr>
-          <div class="comments card-text">
-            <label>コメント</label>
-            <% @post.post_comments.each do |post_comment| %>
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3">
-                  <p class="mt-2 ml-2"><%= image_tag post_comment.user.get_profile_image, width: 40, height: 40 %></p>
-                  <p class="ml-1"><%= post_comment.user.name %></p>
-                </div>
-                <div class="col-md-9 mt-2">
-                  <p><%= post_comment.comment %></p>
-                  <p class="text-right mr-2">
-                  <% if post_comment.user == current_user %>
-                    <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-outline-danger" %>
-                  <% end %>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <% end %>
+<!--コメントセクション-->
+  <!--コメント一覧-->
+          <div id="comment_index">
+            <%= render 'post_comments/index', post: @post %>
           </div>
-        <% if user_signed_in? %>
-          <hr>
-          <div class="new-comment card-text">
-            <%= form_with model: [@post, @post_comment] do |f| %>
-              <div class="form-group">
-                <label>コメントする</label>
-                <%= f.text_area :comment, class: "form-control", placeholder: "コメントをここに", rows: 5 %>
-              </div>
-              <%= f.submit "送信する", class: "btn btn-primary float-right" %>
-            <% end %>
-          </div>
-        <% end %>
-        <!--コメントセクション-->
+  <!--コメントフォーム-->
+          <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+<!--コメントセクション-->
+
         </div>
       </div>
 

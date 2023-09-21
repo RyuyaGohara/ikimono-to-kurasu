@@ -1,68 +1,19 @@
+<% if @range == "ユーザー" %>
 
-  <% if @range == "ユーザー" %>
-
-    <h3>"<%= @word %>"でユーザーを検索しました</h3>
-    <% if @users.present? %>
-      <%= render 'users/index', users: @users %>
-    <% else %>
-      <p style="text-align: center; font-weight: bold;">該当するユーザーは見つかりませんでした</p>
-    <% end %>
-
+  <h3>"<%= @word %>"でユーザーを検索しました</h3>
+  <% if @users.present? %>
+    <%= render 'users/index', users: @users %>
   <% else %>
-
-    <h3>"<%= @word %>"で投稿を検索しました</h3>
-    <% if @posts.present? %>
-      <div class="container my-3">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <% @posts.each do |post| %>
-            <% if post.user %>
-            <div class="card mb-3">
-              <p class="text-right my-2 mr-2">投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-3">
-                    <p><%= image_tag post.user.get_profile_image, width: 70, height: 70 %></p>
-                    <p><%= link_to post.user.name, user_path(post.user) %></p>
-                  </div>
-                  <div class="col-md-9">
-                    <h5 class="card-title">
-                      <%= link_to post.title, post_path(post) %>
-                      <% if post.get_image.attached? %>
-                        <span class="badge ml-2">（投稿画像あり）</span>
-                      <% end %>
-                    </h5>
-                    <p class="card-text"><%= post.body %></p>
-
-                    <% if user_signed_in? %>
-                      <% if post.favorited_by?(current_user) %>
-                        <span>
-                          <%= link_to post_favorites_path(post), method: :delete do %>
-                            <i class="fa-solid fa-heart"></i><%= post.favorites.count %>
-                          <% end %>
-                        </span>
-                        <% else %>
-                        <span>
-                          <%= link_to post_favorites_path(post), method: :post do %>
-                            <i class="fa-regular fa-heart"></i><%= post.favorites.count %>
-                          <% end %>
-                        </span>
-                      <% end %>
-                    <% end %>
-
-                    <span class="ml-4"><i class="fa-regular fa-comment"></i><%= post.post_comments.count %></span>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% else %>
-      <p style="text-align: center; font-weight: bold;">該当する投稿は見つかりませんでした</p>
-    <% end %>
-
+    <p style="text-align: center; font-weight: bold;">該当するユーザーは見つかりませんでした</p>
   <% end %>
+
+<% else %>
+
+  <h3>"<%= @word %>"で投稿を検索しました</h3>
+  <% if @posts.present? %>
+    <%= render 'posts/index', posts: @posts %>
+  <% else %>
+    <p style="text-align: center; font-weight: bold;">該当する投稿は見つかりませんでした</p>
+  <% end %>
+
+<% end %>

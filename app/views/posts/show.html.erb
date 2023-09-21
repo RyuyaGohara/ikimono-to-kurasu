@@ -17,21 +17,9 @@
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-text"><%= @post.body %></p>
 
-              <% if user_signed_in? %>
-                <% if @post.favorited_by?(current_user) %>
-                  <span>
-                    <%= link_to post_favorites_path(@post), method: :delete do %>
-                      <i class="fa-solid fa-heart"></i><%= @post.favorites.count %>
-                    <% end %>
-                  </span>
-                  <% else %>
-                  <span>
-                    <%= link_to post_favorites_path(@post), method: :post do %>
-                      <i class="fa-regular fa-heart"></i><%= @post.favorites.count %>
-                    <% end %>
-                  </span>
-                <% end %>
-              <% end %>
+              <span id="favorite_btn_<%= @post.id %>">
+                <%= render "favorites/favorite_btn", post: @post %>
+              </span>
 
               <span class="ml-4"><i class="fa-regular fa-comment"></i><%= @post.post_comments.count %></span>
 

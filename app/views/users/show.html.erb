@@ -10,7 +10,7 @@
         <div class="col-md-6 text-right">
           <!--ユーザーの編集、退会ボタン　ログインしてるユーザー本人の詳細ページのみに表示-->
           <div class="text-right">
-            <% if user_signed_in? && @user == current_user %>
+            <% if user_signed_in? && @user == current_user || current_user.admin? %>
               <% unless @user.email == "guest@example.com" then %>
                 <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-success" %>
                 <%= link_to "削除",user_path(current_user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>

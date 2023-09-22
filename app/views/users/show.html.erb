@@ -1,59 +1,82 @@
-<div class="container">
+<!--ユーザー詳細-->
+<div class="container mt-3">
   <div class="row justify-content-center">
-<!--コンテナ-->
     <div class="col-md-8">
 
-      <h2>プロフィール</h2>
       <div class="row">
+        <div class="col-md-6">
+          <h3>プロフィール</h3>
+        </div>
+        <div class="col-md-6 text-right">
+          <!--ユーザーの編集、退会ボタン　ログインしてるユーザー本人の詳細ページのみに表示-->
+          <div class="text-right">
+            <% if user_signed_in? && @user == current_user %>
+              <% unless @user.email == "guest@example.com" then %>
+                <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-success" %>
+                <%= link_to "削除",user_path(current_user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
+              <% end %>
+            <% end %>
+          </div>
+          <!--フォローボタン　ログインしてるユーザー本人以外の詳細ページのみに表示-->
+          <div class="text-right">
+            <% if user_signed_in? %>
+              <% if current_user != @user %>
+                <% if current_user.following?(@user) %>
+                  <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-outline-secondary" %>
+                <% else %>
+                  <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-outline-primary" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-3">
         <div class="col-md-4">
           <%= image_tag @user.get_profile_image, width: 150, height: 150 %>
         </div>
         <div class="col-md-8">
-          <div>ユーザーネーム：<%= @user.name %></div>
-          <div>自己紹介：<%= @user.introduction %></div>
+          <h5>ユーザーネーム：<%= @user.name %></h5>
+          <p>自己紹介：<%= @user.introduction %></p>
+          <p>登録日：<%= @user.created_at.strftime('%Y/%m/%d') %></p>
+          <p>投稿数：<%= @user.posts.count %></p>
 
-          <span class="mr-3">
+          <span class="mr-5"><%=link_to"お気に入り投稿",favorites_user_path(@user) %></span>
+
+          <span class="mr-2">
             <%= link_to user_followings_path(@user) do %>
               <%= @user.followings.count %>フォロー
             <% end %>
           </span>
 
-          <span>
+          <span class="mr-2">
             <%= link_to user_followers_path(@user) do %>
               <%= @user.followers.count %>フォロワー
             <% end %>
           </span>
-
-        <span>
-        <!--ユーザー情報編集リンク-->
-          <% if @user == current_user %>
-            <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
-          <% end%>
-        <!--ユーザー退会ボタン-->
-          <% if user_signed_in? && @user == current_user %>
-            <% unless @user.email == "guest@example.com" then %>
-              <%= link_to "削除",user_path(current_user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
-            <% end %>
-          <% end %>
-        </span>
-
         </div>
       </div>
 
-
-      <% if user_signed_in? %>
-        <% if current_user != @user %>
-          <% if current_user.following?(@user) %>
-            <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-info" %>
-          <% else %>
-            <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
-          <% end %>
-        <% end %>
-      <% end %>
-
-
-
     </div>
-<!--コンテナ-->
   </div>
+</div>
+
+<!--投稿一覧-->
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <hr>
+      <h3>投稿</h3>
+    </div>
+  </div>
+  <% if @posts.any? %> <!-- @postsに投稿があるかどうかをチェック -->
+    <%= render 'posts/index', posts: @posts %>
+  <% else %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <p>まだ投稿がありません。</p>
+      </div>
+    </div>
+  <% end %>
 </div>

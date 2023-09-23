@@ -8,7 +8,7 @@
         </div>
         <%= form_with model: @user, url: user_registration_path do |f| %>
           <div class="input-group mb-3">
-            <%= f.text_field :name, class: "form-control", placeholder: "名前", autofocus: true %>
+            <%= f.text_field :name, class: "form-control", placeholder: "ユーザーネーム", autofocus: true %>
           </div>
           <div class="input-group mb-3">
             <%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
@@ -19,6 +19,25 @@
           <div class="input-group mb-3">
             <%= f.password_field :password_confirmation, class: "form-control", placeholder: "パスワード確認" %>
           </div>
+<!--エラーメッセージ-->
+          <% if @user.errors[:name].any? %>
+            <div class="alert alert-danger">
+              <%= @user.errors[:name].join(', ') %>
+            </div>
+          <% end %>
+
+          <% if @user.errors[:email].any? %>
+            <div class="alert alert-danger">
+              <%= @user.errors[:email].join(', ') %>
+            </div>
+          <% end %>
+
+          <% if @user.errors[:encrypted_password].any? %>
+            <div class="alert alert-danger">
+              <%= @user.errors[:encrypted_password].join(', ') %>
+            </div>
+          <% end %>
+
           <%= f.submit "ユーザー登録", class: "btn btn-block btn-info mt-5" %>
         <% end %>
       </div>

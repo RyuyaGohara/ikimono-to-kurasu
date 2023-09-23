@@ -1,6 +1,13 @@
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+<!--失敗フラッシュメッセージ-->
+      <% if flash[:alert].present? %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
       <h5 class="text-dark bg-light py-4 mb-0">投稿編集</h5>
       <div class="form-body p-4">
         <div class="mx-auto text-center">

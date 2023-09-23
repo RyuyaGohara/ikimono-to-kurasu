@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー情報を更新しました"
       redirect_to user_path(@user.id)
     else
+      flash.now[:alert] = "ユーザー情報の更新ができませんでした"
       render :edit
     end
   end

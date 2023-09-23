@@ -5,6 +5,9 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+  validates :title, presence: { message: "タイトルは必須です" }
+  validates :body, presence: { message: "本文は必須です" }
+
   def get_image
     image
   end

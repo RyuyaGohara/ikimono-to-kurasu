@@ -17,6 +17,19 @@
           <div class="input-group mb-3">
             <%= f.text_area :body, class: "form-control", placeholder: "本文" %>
           </div>
+<!--エラーメッセージ-->
+          <% if @post.errors[:title].any? %>
+            <div class="alert alert-danger">
+              <%= @post.errors[:title].join(', ') %>
+            </div>
+          <% end %>
+
+          <% if @post.errors[:body].any? %>
+            <div class="alert alert-danger">
+              <%= @post.errors[:body].join(', ') %>
+            </div>
+          <% end %>
+
           <%= f.submit "更新", class: "btn btn-lg btn-block btn-info mt-5" %>
         <% end %>
       </div>

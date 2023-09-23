@@ -1,6 +1,12 @@
 <div class="container my-3">
   <div class="row justify-content-center">
     <div class="col-md-8">
+<!--フラッシュメッセージ-->
+      <% if flash[:notice].present? %>
+        <div class="alert alert-info">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 
       <div class="card">
         <p class="text-right my-2 mr-2">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>

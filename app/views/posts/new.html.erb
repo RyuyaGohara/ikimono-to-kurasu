@@ -1,6 +1,13 @@
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+<!--フラッシュメッセージ-->
+      <% if flash[:alert].present? %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
       <h5 class="text-dark bg-light py-4 mb-0">新規投稿</h5>
       <div class="form-body p-4">
         <div class="mx-auto text-center">
@@ -17,6 +24,19 @@
           <div class="input-group mb-3">
             <%= f.text_area :body, class: "form-control", placeholder: "本文" %>
           </div>
+<!--エラーメッセージ-->
+          <% if @post.errors[:title].any? %>
+            <div class="alert alert-danger">
+              <%= @post.errors[:title].join(', ') %>
+            </div>
+          <% end %>
+
+          <% if @post.errors[:body].any? %>
+            <div class="alert alert-danger">
+              <%= @post.errors[:body].join(', ') %>
+            </div>
+          <% end %>
+
           <%= f.submit "投稿", class: "btn btn-lg btn-block btn-info mt-5" %>
         <% end %>
       </div>

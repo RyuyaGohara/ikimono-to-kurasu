@@ -32,7 +32,7 @@
               </span>
 <!--投稿の編集、削除ボタン-->
               <p class="text-right my-2 mr-2">
-                <% if @post.user == current_user %>
+                <% if @post.user == current_user || user_signed_in? && current_user.admin? %>
                   <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-outline-success" %>
                   <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-outline-danger", data: { confirm: "この投稿を本当に削除しますか?" } %>
                 <% end %>

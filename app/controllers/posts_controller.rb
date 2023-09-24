@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     # 新着の投稿が上になるように
@@ -53,6 +54,19 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :image)
+  end
+
+# 権限設定
+  def is_matching_login_user
+    post = Post.find(params[:id])
+# ログインユーザーが管理者ユーザーかどうかを確認、管理者ユーザーの場合は通貨させる
+    if current_user.admin?
+      return
+    end
+# ログインユーザーと編集対象のユーザーが一致しない場合はリダイレクト
+    unless post.user.id == current_user.id
+      redirect_to posts_path
+    end
   end
 
 end

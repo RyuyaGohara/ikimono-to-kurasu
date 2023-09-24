@@ -9,6 +9,7 @@
 User.create!(
   name: "いきものとくらす",
   email: "admin@example.jp",
+  introduction: "特に猫が好きな人です",
   password: "ikimonotokurasu202307",
   password_confirmation: "ikimonotokurasu202307",
   admin: true

@@ -18,8 +18,10 @@
           <div class="text-right">
             <% if user_signed_in? && @user == current_user || user_signed_in? && current_user.admin? %>
               <% unless @user.email == "guest@example.com" then %>
+              <% unless @user.email == "admin@example.jp" then %>
                 <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-success" %>
-                <%= link_to "削除",user_path(current_user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
+                <%= link_to "削除",user_path(@user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
+              <% end %>
               <% end %>
             <% end %>
           </div>

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+
   def index
     # 新規ユーザーが上に来るように
     @users = User.all.order(created_at: :desc)
@@ -47,6 +49,19 @@ private
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction, :email)
+  end
+
+# 権限設定
+  def is_matching_login_user
+    user = User.find(params[:id])
+  # ログインユーザーが管理者ユーザーかどうかを確認、管理者ユーザーの場合は通貨させる
+    if current_user.admin?
+      return
+    end
+  # ログインユーザーと編集対象のユーザーが一致しない場合はリダイレクト
+    unless user.id == current_user.id
+      redirect_to user_path(current_user.id)
+    end
   end
 
 end

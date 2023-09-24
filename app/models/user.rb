@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
-  validates :name, presence: { message: "ユーザーネームを入力してください" }
-  validates :email, presence: { message: "メールアドレスを入力してください" }
-  validates :encrypted_password, presence: { message: "パスワードを入力してください" }
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
 
 # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

@@ -1,11 +1,19 @@
 <div class="container">
 
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <% if flash[:notice].present? %>
+        <div class="alert alert-info">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-9 mx-auto mt-5 text-center">
-
       <h3><strong>「いきものとくらす」</strong></h3>
       <p><strong>生き物</strong>が好きな人たちが集まり、気軽に投稿や情報交換ができるSNS</p>
-
     </div>
   </div>
 

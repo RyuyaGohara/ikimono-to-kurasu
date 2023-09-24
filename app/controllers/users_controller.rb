@@ -2,14 +2,14 @@ class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
-    # 新規ユーザーが上に来るように
-    @users = User.all.order(created_at: :desc)
+    # ページネーション、新規ユーザーが上に来るように
+    @users = User.page(params[:page]).order(created_at: :desc)
   end
 
   def show
     @user = User.find(params[:id])
-    # 新着投稿が上になるように
-    @posts = @user.posts.order(created_at: :desc)
+    # ページネーション、新着投稿が上になるように
+    @posts = @user.posts.page(params[:page]).order(created_at: :desc)
   end
 
   # お気に入り投稿一覧用

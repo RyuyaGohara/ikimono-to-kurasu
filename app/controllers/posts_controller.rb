@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
-    # 新着の投稿が上になるように
-    @posts = Post.all.order(created_at: :desc)
+    # ページネーション、新着の投稿が上になるように
+    @posts = Post.page(params[:page]).order(created_at: :desc)
   end
 
   def new

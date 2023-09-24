@@ -30,4 +30,5 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-後ほど必要であれば記載、不要であれば削除します
+- アイコン素材ダウンロードサイト「icooon-mono」 https://icooon-mono.com/
+- 写真素材等 「写真AC」 https://www.photo-ac.com/

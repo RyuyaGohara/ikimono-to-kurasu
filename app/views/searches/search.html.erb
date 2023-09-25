@@ -1,7 +1,14 @@
 <!--検索結果一覧-->
 <% if @range == "ユーザー" %>
 
-  <h3>"<%= @word %>"でユーザーを検索しました</h3>
+<!--ユーザー検索結果-->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h4>"<%= @word %>"でユーザーを検索しました</h4>
+      </div>
+    </div>
+  </div>
   <% if @users.present? %>
     <%= render 'users/index', users: @users %>
   <% else %>
@@ -10,7 +17,14 @@
 
 <% else %>
 
-  <h3>"<%= @word %>"で投稿を検索しました</h3>
+<!--投稿検索結果-->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h4>"<%= @word %>"で投稿を検索しました</h4>
+      </div>
+    </div>
+  </div>
   <% if @posts.present? %>
     <%= render 'posts/index', posts: @posts %>
   <% else %>

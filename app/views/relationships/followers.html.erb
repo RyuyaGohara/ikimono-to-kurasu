@@ -1,7 +1,14 @@
-<h3>フォロワー一覧</h3>
+<!--フォロワー一覧-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h4>フォロワー一覧</h4>
+    </div>
+  </div>
+</div>
 
 <% if @users.present? %>
   <%= render 'users/index', users: @users %>
 <% else %>
-  <p>フォローされてるユーザーはいません</p>
+  <p class="text-center">フォローされてるユーザーはいません</p>
 <% end %>

@@ -9,24 +9,14 @@
         </div>
       <% end %>
 
-      <div class="row">
+      <div class="row bg-light">
         <div class="col-md-6">
-          <h3>プロフィール</h3>
+          <h3 class="pt-3">プロフィール</h3>
         </div>
         <div class="col-md-6 text-right">
-          <!--ユーザーの編集、退会ボタン　ログインしてるユーザー本人の詳細ページのみに表示-->
-          <div class="text-right">
-            <% if user_signed_in? && @user == current_user || user_signed_in? && current_user.admin? %>
-              <% unless @user.email == "guest@example.com" then %>
-              <% unless @user.email == "admin@example.jp" then %>
-                <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-success" %>
-                <%= link_to "削除",user_path(@user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
-              <% end %>
-              <% end %>
-            <% end %>
-          </div>
+
           <!--フォローボタン　ログインしてるユーザー本人以外の詳細ページのみに表示-->
-          <div class="text-right">
+          <div class="text-right pt-3">
             <% if user_signed_in? %>
               <% if current_user != @user %>
                 <% if current_user.following?(@user) %>
@@ -40,8 +30,8 @@
         </div>
       </div>
 
-      <div class="row p-3">
-        <div class="col-md-4">
+      <div class="row bg-light p-3">
+        <div class="col-md-4 mb-3">
           <%= image_tag @user.get_profile_image, width: 150, height: 150 %>
         </div>
         <div class="col-md-8">
@@ -63,6 +53,19 @@
               <%= @user.followers.count %>フォロワー
             <% end %>
           </span>
+
+          <!--ユーザーの編集、退会ボタン　ログインしてるユーザー本人の詳細ページのみに表示-->
+          <div class="text-right">
+            <% if user_signed_in? && @user == current_user || user_signed_in? && current_user.admin? %>
+              <% unless @user.email == "guest@example.com" then %>
+              <% unless @user.email == "admin@example.jp" then %>
+                <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-outline-success" %>
+                <%= link_to "削除",user_path(@user.id), class: "destroy-user btn btn-outline-danger", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
+              <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
         </div>
       </div>
 
@@ -73,7 +76,7 @@
 <!--投稿一覧-->
 <div class="container mt-4">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 text-center">
       <hr>
       <h3>投稿</h3>
     </div>
@@ -82,7 +85,7 @@
     <%= render 'posts/index', posts: @posts %>
   <% else %>
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-8　text-center">
         <p>まだ投稿がありません。</p>
       </div>
     </div>

@@ -20,7 +20,8 @@
 - 興味のある飼いたいと思っている生き物について調べたいとき
 ​
 ## 設計書
-後ほど作成予定
+- 画面遷移図、ER図　https://app.diagrams.net/#G1s9FaUOwkY-Yobybz7F2RORMEXqrUs7vW
+- テーブル定義書　https://docs.google.com/spreadsheets/d/1k15rpxsKfBzwkjgL8Eu_zC65LSfVwjzXO1ji7LVlXFI/edit#gid=0
 ​
 ## 開発環境
 - OS：Linux(CentOS)

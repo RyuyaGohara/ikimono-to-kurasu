@@ -6,7 +6,9 @@
         <label>コメントする</label>
         <%= f.text_area :comment, class: "form-control", placeholder: "コメントをここに", rows: 5, id: "comment_textarea" %>
       </div>
-      <%= f.submit "送信する", class: "btn btn-primary float-right" %>
+      <%= f.button class: "btn btn-primary float-right" do %>
+        <i class="fa-regular fa-paper-plane"></i>
+      <% end %>
     <% end %>
   </div>
 <% end %>

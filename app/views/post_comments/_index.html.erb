@@ -14,7 +14,9 @@
       <div class="col-md-3 mt-2">
         <p class="text-right mr-2">
         <% if post_comment.user == current_user || user_signed_in? && current_user.admin? %>
-          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-outline-danger", remote:true %>
+          <%= link_to post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-outline-danger", remote:true do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
         <% end %>
         </p>
       </div>

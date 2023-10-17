@@ -16,3 +16,9 @@ main {
   background-color:rgba(255,255,255,0.8);
   background-blend-mode:lighten;
 }
+
+// 投稿詳細ページ　コメント一覧スクロール用
+.comment-container {
+  max-height: 500px;
+  overflow-y: auto;
+}

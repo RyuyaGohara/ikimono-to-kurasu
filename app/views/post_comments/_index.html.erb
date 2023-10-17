@@ -1,7 +1,5 @@
-<hr>
 <div class="comments card-text">
-  <label>コメント</label>
-  <% post.post_comments.each do |post_comment| %>
+  <% post.post_comments.reverse.each do |post_comment| %>
   <div class="card">
     <div class="row">
       <div class="col-md-3">

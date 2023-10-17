@@ -43,8 +43,10 @@
           </div>
 
 <!--コメントセクション-->
+          <hr>
   <!--コメント一覧-->
-          <div id="comment_index">
+          <label>コメント</label>
+          <div id="comment_index" class="comment-container">
             <%= render 'post_comments/index', post: @post %>
           </div>
   <!--コメントフォーム-->

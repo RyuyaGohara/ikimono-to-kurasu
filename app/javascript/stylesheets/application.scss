@@ -22,3 +22,10 @@ main {
   max-height: 500px;
   overflow-y: auto;
 }
+
+/* ページャ全体のスタイル */
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center; /* ページャを中央に配置 */
+}

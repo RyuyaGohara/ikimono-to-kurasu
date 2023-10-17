@@ -36,8 +36,9 @@
               <%= @post.errors[:body].join(', ') %>
             </div>
           <% end %>
-
+<!--更新ボタン、削除ボタン-->
           <%= f.submit "更新", class: "btn btn-lg btn-block btn-info mt-5" %>
+          <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-outline-danger btn-lg btn-block mt-3", data: { confirm: "この投稿を本当に削除しますか?" } %>
         <% end %>
       </div>
     </div>

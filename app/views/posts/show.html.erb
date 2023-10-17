@@ -30,14 +30,11 @@
               <span id="favorite_btn_<%= @post.id %>">
                 <%= render "favorites/favorite_btn", post: @post %>
               </span>
-<!--投稿の編集、削除ボタン-->
+<!--投稿の編集ボタン（削除ボタンは編集ページに配置）-->
               <p class="text-right my-2 mr-2">
                 <% if @post.user == current_user || user_signed_in? && current_user.admin? %>
                   <%= link_to edit_post_path(@post), class: "btn btn-outline-success" do %>
                     <i class="fa-solid fa-pen"></i>
-                  <% end %>
-                  <%= link_to post_path(@post), method: :delete, class: "btn btn-outline-danger", data: { confirm: "この投稿を本当に削除しますか?" } do %>
-                    <i class="fa-solid fa-xmark"></i>
                   <% end %>
                 <% end %>
               </p>

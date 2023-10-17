@@ -1,9 +1,35 @@
-<h4>通知</h4>
-<% if @notifications.present? %>
-  <%= link_to "全削除",notification_path(@notifications), method: :delete,class:"btn btn-light" %>
-  <% @notifications.each do |notification| %>
-    <%= render "#{notification.action_type}", notification: notification %>
+<div class="container mb-5">
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <h4>通知一覧</h4>
+    </div>
+  </div>
+
+  <% if @notifications.present? %>
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-right">
+        <%= link_to notification_path(@notifications), method: :delete, class: "btn btn-danger" do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <% @notifications.each do |notification| %>
+          <div class="card my-2 px-3 py-3">
+            <%= render "#{notification.action_type}", notification: notification %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <p>通知はありません</p>
+      </div>
+    </div>
   <% end %>
-<% else %>
-  通知はありません
-<% end %>
+
+</div>

@@ -30,7 +30,7 @@
               <%= @user.errors[:name].join(', ') %>
             </div>
           <% end %>
-<!--更新、削除ボタン-->
+<!--更新、削除（退会）ボタン-->
           <%= f.submit "更新", class: "btn btn-lg btn-block btn-info mt-5" %>
           <%= link_to "削除",user_path(@user.id), class: "destroy-user btn btn-outline-danger btn-lg btn-block mt-3", method: :delete, "data-confirm" => "本当にこのユーザーを削除しますか？" %>
         <% end %>

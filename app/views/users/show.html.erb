@@ -54,7 +54,7 @@
             <% end %>
           </span>
 
-          <!--ユーザーの編集、退会ボタン　ログインしてるユーザー本人と管理者ユーザーにのみに表示-->
+          <!--ユーザーの編集ボタン　ログインしてるユーザー本人と管理者ユーザーにのみに表示-->
           <div class="text-right">
             <% if user_signed_in? && @user == current_user || user_signed_in? && current_user.admin? %>
               <% unless @user.email == "guest@example.com" then %>

@@ -7,15 +7,13 @@ ja:
       about_x_hours:
         one: "1時間"
         other: "%{count}時間"
-      about_x_days:
+      x_days:
         one: "1日"
         other: "%{count}日"
-      about_x_months:
+      x_months:
         one: "1ヶ月"
         other: "%{count}ヶ月"
-      aboutx_years:
-        one: "1年"
-        other: "%{count}年"
+
 
   devise:
     sessions:

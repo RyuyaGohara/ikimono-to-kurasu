@@ -1,10 +1,11 @@
 <div class="comments card-text">
   <% post.post_comments.reverse.each do |post_comment| %>
   <div class="card">
+    <p class="text-right my-2 mr-2" style="font-size: 12px;"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
     <div class="row">
       <div class="col-md-3">
         <p class="mt-2 ml-2"><%= image_tag post_comment.user.get_profile_image, width: 40, height: 40 %></p>
-        <p class="ml-1"><%= post_comment.user.name %></p>
+        <p class="ml-1" style="font-size: 12px;"><%= post_comment.user.name %></p>
       </div>
       <div class="col-md-6 mt-2">
         <p><%= post_comment.comment %></p>

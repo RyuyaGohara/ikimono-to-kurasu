@@ -13,6 +13,9 @@ ja:
       x_months:
         one: "1ヶ月"
         other: "%{count}ヶ月"
+      about_x_months:
+        one: "約1ヶ月"
+        other: "約%{count}ヶ月"
 
 
   devise:

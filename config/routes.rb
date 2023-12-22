@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
     resources :notifications, only: [:index]
   end
+# DM機能
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create,:show]
 
   resources :notifications, only: [:destroy]
 

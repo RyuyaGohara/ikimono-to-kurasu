@@ -54,6 +54,24 @@
             <% end %>
           </span>
 
+        <!--DM機能、チャットボタン-->
+          <span>
+            <% unless @user.id == current_user.id %>
+              <% if (current_user.following? @user) && (@user.following? current_user)  %>
+              <% if @isRoom == true %>
+                <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+              <% else %>
+                <%= form_for @room do |f| %>
+                  <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, value: @user.id %>
+                  <% end %>
+                  <%= f.submit "チャット", class:"btn btn-primary btn-lg user-show-chat"%>
+                <% end %>
+              <% end %>
+              <% end %>
+            <% end %>
+          </span>
+
           <!--ユーザーの編集ボタン　ログインしてるユーザー本人と管理者ユーザーにのみに表示-->
           <div class="text-right">
             <% if user_signed_in? && @user == current_user || user_signed_in? && current_user.admin? %>

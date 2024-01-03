@@ -1,23 +1,51 @@
-<!--チャットページ-->
-<% @entries.each do |e| %> <!--eachでフォロ・フォロワーの情報を取得-->
-  <% if @myUserId != e.user.id %>
-      <h2><%= e.user.name %>さんとのトークルーム</h2>
+<div class="container mt-4">
+
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <!--チャットページ-->
+      <% @entries.each do |e| %> <!--eachでフォロ・フォロワーの情報を取得-->
+        <% if @myUserId != e.user.id %>
+            <h2><%= e.user.name %>さんとのトークルーム</h2>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+  </div>
 
-<%= link_to "ユーザー一覧に戻る", users_path %>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <% if @messages.present? %>
+        <% @messages.each do |m| %>
+          <% if @myUserId == m.user.id %>
+            <div class="d-flex justify-content-end mb-3">
+              <div class="bg-info text-white p-2 rounded">
+                <p><%= m.user.name %></p>
+                <p><%= m.message %></p>
+              </div>
+            </div>
+          <% else %>
+            <div class="d-flex justify-content-start mb-3">
+              <div class="bg-light p-2 rounded">
+                <p><%= m.user.name %></p>
+                <p><%= m.message %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-  <% if @messages.present? %>
-    <% @messages.each do |m| %>
-      <% @myUserId == m.user.id  %>
-        <p><%= m.user.name %></p>
-        <p><%= m.message %></p>
-    <% end %>
-  <% end %>
 
-<%= form_for @message do |f| %>
-  <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 50, class:"form-text-field" %>
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.submit "投稿",class: 'form-submit'%>
-<% end %>
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <%= form_for @message do |f| %>
+        <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 50, class:"form-text-field" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "投稿",class: 'form-submit'%>
+      <% end %>
+      <%= link_to "ユーザー一覧に戻る", users_path %>
+    </div>
+  </div>
+
+</div>

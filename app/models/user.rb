@@ -12,6 +12,8 @@ class User < ApplicationRecord
 # DM機能
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
+# 投稿閲覧数表示 
+  has_many :view_counts, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true

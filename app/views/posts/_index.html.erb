@@ -28,6 +28,9 @@
                 <%= render "favorites/favorite_btn", post: post %>
               </span>
 
+<!--投稿閲覧数-->
+              <span class="ml-4"><%= post.view_counts.count %></span>
+
             </div>
           </div>
         </div>

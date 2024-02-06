@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_one :notification, as: :subject, dependent: :destroy
+# 投稿閲覧数表示
+  has_many :view_counts, dependent: :destroy
 
   validates :title, presence: { message: "タイトルは必須です" }
   validates :body, presence: { message: "本文は必須です" }
